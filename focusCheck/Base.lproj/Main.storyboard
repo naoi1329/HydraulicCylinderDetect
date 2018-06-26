@@ -34,14 +34,21 @@
                                 <color key="backgroundColor" white="1" alpha="0.56378424657534243" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rl5-0a-ohb">
+                                <rect key="frame" x="0.0" y="465" width="375" height="74"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BZv-uo-C1m"/>
+                            <constraint firstItem="rl5-0a-ohb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CKd-ub-Ydc"/>
+                            <constraint firstItem="5L1-ph-YZu" firstAttribute="top" secondItem="rl5-0a-ohb" secondAttribute="bottom" constant="8" id="Eho-ib-Y8p"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="height" secondItem="X7v-Ky-f0I" secondAttribute="height" multiplier="1:9" id="Mnu-bm-HDh"/>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PSa-1e-Gs2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5L1-ph-YZu" secondAttribute="trailing" constant="8" id="PUP-gm-jgS"/>
+                            <constraint firstItem="rl5-0a-ohb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="U21-ZH-KIy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rqe-zY-aMc" secondAttribute="bottom" constant="8" id="VaP-dz-gTv"/>
+                            <constraint firstItem="rqe-zY-aMc" firstAttribute="height" secondItem="rl5-0a-ohb" secondAttribute="height" id="aSa-5A-HvJ"/>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="dIh-pH-oxi"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="top" secondItem="5L1-ph-YZu" secondAttribute="bottom" constant="8" id="g1v-mU-ja6"/>
                             <constraint firstItem="5L1-ph-YZu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="gWn-n6-TU0"/>
@@ -53,6 +60,7 @@
                     </view>
                     <connections>
                         <outlet property="focusSlider" destination="5L1-ph-YZu" id="1xD-R6-wuM"/>
+                        <outlet property="isoPickerView" destination="rl5-0a-ohb" id="Gg6-sT-Pcp"/>
                         <outlet property="pickerView" destination="rqe-zY-aMc" id="2ZH-40-0ve"/>
                         <outlet property="preView" destination="X7v-Ky-f0I" id="D60-bN-LTH"/>
                     </connections>

@@ -18,8 +18,15 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var preView: UIView!
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var isoPickerView: UIPickerView!
     
     var timeValues: [CMTimeValue] = [0] {
+        didSet {
+            self.pickerView.reloadAllComponents()
+        }
+    }
+    
+    var isoValues: [Float] = [0] {
         didSet {
             self.pickerView.reloadAllComponents()
         }
@@ -33,6 +40,7 @@ class ViewController: UIViewController {
 //            self.camera.
 //        }
 //    }
+    
     @IBOutlet weak var focusSlider: UISlider!
     //@IBOutlet weak var exposureSlider: UISlider!
     
@@ -42,6 +50,11 @@ class ViewController: UIViewController {
         
         pickerView.dataSource = self
         pickerView.delegate = self
+        pickerView.tag = 0
+        
+        isoPickerView.dataSource = self
+        isoPickerView.delegate = self
+        isoPickerView.tag = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,7 +105,7 @@ class ViewController: UIViewController {
             print(error)
         }
         
-        // 入力をセッションに追加
+        // 入力をセzッションに追加
         if(session.canAddInput(input)) {
             session.addInput(input)
         }
@@ -112,12 +125,24 @@ class ViewController: UIViewController {
         // レイヤーをViewに設定
         // これを外すとプレビューが無くなる、けれど撮影はできる
         preView.layer.addSublayer(previewLayer)
-        
         session.startRunning()
-        
 
 //        exposureSliderSetUp()
         exposurePickerSetUp()
+        isoPickerViewSetUp()
+    }
+    
+    func isoPickerViewSetUp() {
+        let maxISO = camera.activeFormat.maxISO
+        let minISO = camera.activeFormat.minISO
+        
+        print("maxISO = \(maxISO)")
+        print("miISO = \(minISO)")
+        
+        self.isoValues = (Int(minISO*10)...Int(maxISO*10)).map { num in
+            let returnNum = Float(num) / 10.0
+            return returnNum
+        }
     }
     
     func exposurePickerSetUp() {
@@ -177,33 +202,51 @@ class ViewController: UIViewController {
 //
 //    }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first else {
-//            return
-//        }
-//
-//        let location = touch.location(in: self.view)
-//
-//        let normalizePoint = locationNormalize(location)
-//
-//        if camera.isExposurePointOfInterestSupported {
-//            do {
-//                try camera.lockForConfiguration()
-//                camera.exposureMode = .continuousAutoExposure
-////                camera.configureExposurePointOfInterest(exposurePointOfInterest: normalizePoint, exposureMode: .continuousAutoExposure)
-//                camera.exposurePointOfInterest = normalizePoint
-//
-////                print(camera.exposurePointOfInterest)
-////                print(camera.exposureMode.rawValue)
-////                print(camera.isAdjustingExposure)
-//                session.startRunning()
-//                camera.unlockForConfiguration()
-//            } catch {
-//                print("device lock failled")
-//            }
-//        }
-//    }
-//
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+
+        let location = touch.location(in: self.view)
+
+        let normalizePoint = locationNormalize(location)
+
+        if camera.isExposurePointOfInterestSupported {
+            do {
+                try camera.lockForConfiguration()
+                camera.exposureMode = .continuousAutoExposure
+//                camera.configureExposurePointOfInterest(exposurePointOfInterest: normalizePoint, exposureMode: .continuousAutoExposure)
+                camera.exposurePointOfInterest = normalizePoint
+
+//                print(camera.exposurePointOfInterest)
+//                print(camera.exposureMode.rawValue)
+//                print(camera.isAdjustingExposure)
+                session.startRunning()
+                camera.unlockForConfiguration()
+            } catch {
+                print("device lock failled")
+            }
+        }
+        
+        if camera.isFocusModeSupported(.autoFocus) {
+            do {
+                try camera.lockForConfiguration()
+                camera.focusMode = .autoFocus
+                //                camera.configureExposurePointOfInterest(exposurePointOfInterest: normalizePoint, exposureMode: .continuousAutoExposure)
+                camera.focusPointOfInterest = normalizePoint
+                
+                //                print(camera.exposurePointOfInterest)
+                //                print(camera.exposureMode.rawValue)
+                //                print(camera.isAdjustingExposure)
+                session.startRunning()
+                camera.unlockForConfiguration()
+            } catch {
+                print("device lock failled")
+            }
+            
+        }
+    }
+    
     func locationNormalize(_ point: CGPoint) -> CGPoint {
         var normalizePoint = point
         
@@ -239,21 +282,42 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(timeValues[row])
+        if pickerView.tag == 0 {
+            return String(timeValues[row])
+        } else if pickerView.tag == 1 {
+            return String(isoValues[row])
+        } else {
+            return "nnonononononondofasoufnopiuawrf"
+        }
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        do {
-            try camera.lockForConfiguration()
-            
-            let duration = CMTime(value: timeValues[row], timescale: camera.activeFormat.minExposureDuration.timescale)
-            camera.setExposureModeCustom(duration: duration, iso: camera.iso, completionHandler: nil)
-            
-            session.startRunning()
-            camera.unlockForConfiguration()
-        } catch {
-            print("device lock failled")
+        if pickerView.tag == 0 {
+            do {
+                try camera.lockForConfiguration()
+                
+                let duration = CMTime(value: timeValues[row], timescale: camera.activeFormat.minExposureDuration.timescale)
+                camera.setExposureModeCustom(duration: duration, iso: camera.iso, completionHandler: nil)
+                
+                session.startRunning()
+                camera.unlockForConfiguration()
+            } catch {
+                print("device lock failled")
+            }
+        } else if pickerView.tag == 1 {
+            do {
+                try camera.lockForConfiguration()
+
+                camera.setExposureModeCustom(duration: camera.exposureDuration, iso: isoValues[row], completionHandler: nil)
+
+                session.startRunning()
+                camera.unlockForConfiguration()
+            } catch {
+                print("device lock failled")
+            }
         }
+        
     }
 }
