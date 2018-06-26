@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     var camera: AVCaptureDevice!
     var session: AVCaptureSession!
     var input: AVCaptureInput!
-    var output: AVCapturePhotoOutput!
+    var output: AVCaptureVideoDataOutput!
     
-    @IBOutlet weak var preView: UIView!
+    @IBOutlet weak var preView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var isoPickerView: UIPickerView!
     
@@ -111,20 +111,31 @@ class ViewController: UIViewController {
         }
         
         // 静止画出力のインスタンス生成
-        output = AVCapturePhotoOutput()
+        output = AVCaptureVideoDataOutput()
+        
         // 出力をセッションに追加
         if(session.canAddOutput(output)) {
             session.addOutput(output)
         }
+        
+        // ピクセルフォーマットを 32bit BGR + A とする
+        output.videoSettings =
+            [kCVPixelBufferPixelFormatTypeKey as AnyHashable as!
+                String : Int(kCVPixelFormatType_32BGRA)]
+        
+        // フレームをキャプチャするためのサブスレッド用のシリアルキューを用意
+        output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        
+        output.alwaysDiscardsLateVideoFrames = true
         // セッションからプレビューを表示を
-        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-
-        previewLayer.frame = self.view.frame
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+//        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+//
+//        previewLayer.frame = self.view.frame
+//        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         // レイヤーをViewに設定
         // これを外すとプレビューが無くなる、けれど撮影はできる
-        preView.layer.addSublayer(previewLayer)
+//        preView.layer.addSublayer(previewLayer)
         session.startRunning()
 
 //        exposureSliderSetUp()
@@ -269,6 +280,56 @@ extension AVCaptureDevice {
             self.exposurePointOfInterest = exposurePointOfInterest
             self.exposureMode = exposureMode
         }
+    }
+}
+
+extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+    // 新しいキャプチャの追加で呼ばれる
+    func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        // キャプチャしたsampleBufferからUIImageを作成
+        let image:UIImage = self.captureImage(sampleBuffer)
+        
+        // 画像を画面に表示
+        DispatchQueue.main.async {
+            self.preView.image = image
+        }
+    }
+    
+    // sampleBufferからUIImageを作成
+    func captureImage(_ sampleBuffer:CMSampleBuffer) -> UIImage{
+        
+        // Sampling Bufferから画像を取得
+        let imageBuffer:CVImageBuffer =
+            CMSampleBufferGetImageBuffer(sampleBuffer)!
+        
+        // pixel buffer のベースアドレスをロック
+        CVPixelBufferLockBaseAddress(imageBuffer,
+                                     CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+        
+        let baseAddress:UnsafeMutableRawPointer =
+            CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0)!
+        
+        let bytesPerRow:Int = CVPixelBufferGetBytesPerRow(imageBuffer)
+        let width:Int = CVPixelBufferGetWidth(imageBuffer)
+        let height:Int = CVPixelBufferGetHeight(imageBuffer)
+        
+        
+        // 色空間
+        let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        //let bitsPerCompornent:Int = 8
+        // swift 2.0
+        let newContext:CGContext = CGContext(data: baseAddress,
+                                             width: width, height: height, bitsPerComponent: 8,
+                                             bytesPerRow: bytesPerRow, space: colorSpace,
+                                             bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue|CGBitmapInfo.byteOrder32Little.rawValue)!
+        
+        let imageRef:CGImage = newContext.makeImage()!
+        let resultImage = UIImage(cgImage: imageRef,
+                                  scale: 1.0, orientation: UIImageOrientation.right)
+        
+        return resultImage
     }
 }
 
