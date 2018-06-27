@@ -14,6 +14,9 @@
 		05384A6A20D9FA260031606C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05384A6820D9FA260031606C /* LaunchScreen.storyboard */; };
 		05384A7520D9FA260031606C /* focusCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05384A7420D9FA260031606C /* focusCheckTests.swift */; };
 		05384A8020D9FA260031606C /* focusCheckUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05384A7F20D9FA260031606C /* focusCheckUITests.swift */; };
+		2EE45A0F96AC38F8D48F1141 /* Pods_focusCheckTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791318A4EA3F6DE9992188B4 /* Pods_focusCheckTests.framework */; };
+		503B0A631561F8CC5D975FE4 /* Pods_focusCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F55F79935F27878BC6A05 /* Pods_focusCheckUITests.framework */; };
+		7EB110FD728A29CE6514207E /* Pods_focusCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDD683979462C02A9AE94CC /* Pods_focusCheck.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,15 @@
 		05384A7B20D9FA260031606C /* focusCheckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusCheckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05384A7F20D9FA260031606C /* focusCheckUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusCheckUITests.swift; sourceTree = "<group>"; };
 		05384A8120D9FA260031606C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		099AFF52B3F73403B57DB204 /* Pods-focusCheckUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-focusCheckUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-focusCheckUITests/Pods-focusCheckUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		18114C32BC4EF4B86B76D22F /* Pods-focusCheckTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-focusCheckTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-focusCheckTests/Pods-focusCheckTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1F0F55F79935F27878BC6A05 /* Pods_focusCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_focusCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE02C0CD008869EF3534256 /* Pods-focusCheck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-focusCheck.debug.xcconfig"; path = "Pods/Target Support Files/Pods-focusCheck/Pods-focusCheck.debug.xcconfig"; sourceTree = "<group>"; };
+		39FCA42E1952AD7CBC653F58 /* Pods-focusCheckTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-focusCheckTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-focusCheckTests/Pods-focusCheckTests.release.xcconfig"; sourceTree = "<group>"; };
+		753AF7102844BBD1FED48450 /* Pods-focusCheckUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-focusCheckUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-focusCheckUITests/Pods-focusCheckUITests.release.xcconfig"; sourceTree = "<group>"; };
+		791318A4EA3F6DE9992188B4 /* Pods_focusCheckTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_focusCheckTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85D752C025FA61C41FA63883 /* Pods-focusCheck.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-focusCheck.release.xcconfig"; path = "Pods/Target Support Files/Pods-focusCheck/Pods-focusCheck.release.xcconfig"; sourceTree = "<group>"; };
+		ADDD683979462C02A9AE94CC /* Pods_focusCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_focusCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB110FD728A29CE6514207E /* Pods_focusCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EE45A0F96AC38F8D48F1141 /* Pods_focusCheckTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				503B0A631561F8CC5D975FE4 /* Pods_focusCheckUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +96,8 @@
 				05384A7320D9FA260031606C /* focusCheckTests */,
 				05384A7E20D9FA260031606C /* focusCheckUITests */,
 				05384A5D20D9FA220031606C /* Products */,
+				F944E0FA1C4F6BC2F7EC5954 /* Pods */,
+				5ED727070B4FE04260DBE7A4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +142,29 @@
 			path = focusCheckUITests;
 			sourceTree = "<group>";
 		};
+		5ED727070B4FE04260DBE7A4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADDD683979462C02A9AE94CC /* Pods_focusCheck.framework */,
+				791318A4EA3F6DE9992188B4 /* Pods_focusCheckTests.framework */,
+				1F0F55F79935F27878BC6A05 /* Pods_focusCheckUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F944E0FA1C4F6BC2F7EC5954 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2BE02C0CD008869EF3534256 /* Pods-focusCheck.debug.xcconfig */,
+				85D752C025FA61C41FA63883 /* Pods-focusCheck.release.xcconfig */,
+				18114C32BC4EF4B86B76D22F /* Pods-focusCheckTests.debug.xcconfig */,
+				39FCA42E1952AD7CBC653F58 /* Pods-focusCheckTests.release.xcconfig */,
+				099AFF52B3F73403B57DB204 /* Pods-focusCheckUITests.debug.xcconfig */,
+				753AF7102844BBD1FED48450 /* Pods-focusCheckUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05384A8420D9FA260031606C /* Build configuration list for PBXNativeTarget "focusCheck" */;
 			buildPhases = (
+				AAD059392F023FEBD0F2965E /* [CP] Check Pods Manifest.lock */,
 				05384A5820D9FA220031606C /* Sources */,
 				05384A5920D9FA220031606C /* Frameworks */,
 				05384A5A20D9FA220031606C /* Resources */,
+				20D617F893CD24609C59F024 /* [CP] Embed Pods Frameworks */,
+				40B358C892529B2ACA61DB69 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +192,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05384A8720D9FA260031606C /* Build configuration list for PBXNativeTarget "focusCheckTests" */;
 			buildPhases = (
+				3DC5F72E3AEAFA64A49CDF89 /* [CP] Check Pods Manifest.lock */,
 				05384A6C20D9FA260031606C /* Sources */,
 				05384A6D20D9FA260031606C /* Frameworks */,
 				05384A6E20D9FA260031606C /* Resources */,
+				8DC60CF117BAF440BACEDD6B /* [CP] Embed Pods Frameworks */,
+				B5031C759636A49C21252428 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +213,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05384A8A20D9FA260031606C /* Build configuration list for PBXNativeTarget "focusCheckUITests" */;
 			buildPhases = (
+				6A9D1DFFF064A3C0E3608C40 /* [CP] Check Pods Manifest.lock */,
 				05384A7720D9FA260031606C /* Sources */,
 				05384A7820D9FA260031606C /* Frameworks */,
 				05384A7920D9FA260031606C /* Resources */,
+				BC4BB163767CE979B332F164 /* [CP] Embed Pods Frameworks */,
+				ACED4F56017AB104DE24D08A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,6 +299,156 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20D617F893CD24609C59F024 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-focusCheck/Pods-focusCheck-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OpenCV/opencv2.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/opencv2.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-focusCheck/Pods-focusCheck-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3DC5F72E3AEAFA64A49CDF89 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-focusCheckTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40B358C892529B2ACA61DB69 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-focusCheck/Pods-focusCheck-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A9D1DFFF064A3C0E3608C40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-focusCheckUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DC60CF117BAF440BACEDD6B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-focusCheckTests/Pods-focusCheckTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAD059392F023FEBD0F2965E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-focusCheck-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACED4F56017AB104DE24D08A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-focusCheckUITests/Pods-focusCheckUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5031C759636A49C21252428 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-focusCheckTests/Pods-focusCheckTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC4BB163767CE979B332F164 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-focusCheckUITests/Pods-focusCheckUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		05384A5820D9FA220031606C /* Sources */ = {
@@ -428,15 +627,13 @@
 		};
 		05384A8520D9FA260031606C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BE02C0CD008869EF3534256 /* Pods-focusCheck.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				INFOPLIST_FILE = focusCheck/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = naoi.focusCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -446,15 +643,13 @@
 		};
 		05384A8620D9FA260031606C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85D752C025FA61C41FA63883 /* Pods-focusCheck.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				INFOPLIST_FILE = focusCheck/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = naoi.focusCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -464,17 +659,14 @@
 		};
 		05384A8820D9FA260031606C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18114C32BC4EF4B86B76D22F /* Pods-focusCheckTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				INFOPLIST_FILE = focusCheckTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = naoi.focusCheckTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -485,17 +677,14 @@
 		};
 		05384A8920D9FA260031606C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39FCA42E1952AD7CBC653F58 /* Pods-focusCheckTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				INFOPLIST_FILE = focusCheckTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = naoi.focusCheckTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -506,16 +695,13 @@
 		};
 		05384A8B20D9FA260031606C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 099AFF52B3F73403B57DB204 /* Pods-focusCheckUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				INFOPLIST_FILE = focusCheckUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = naoi.focusCheckUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -526,16 +712,13 @@
 		};
 		05384A8C20D9FA260031606C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 753AF7102844BBD1FED48450 /* Pods-focusCheckUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				INFOPLIST_FILE = focusCheckUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = naoi.focusCheckUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
