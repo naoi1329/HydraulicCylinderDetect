@@ -33,13 +33,7 @@ class ViewController: UIViewController {
     }
     
     var beforeTouchPosition: CGPoint = CGPoint(x: 0, y: 0)
-    
-    //設定不可能
-//    var aperture: Float = 0.5 {
-//        didSet {
-//            self.camera.
-//        }
-//    }
+    var oldZoomScale: CGFloat = 1.0
     
     @IBOutlet weak var focusSlider: UISlider!
     //@IBOutlet weak var exposureSlider: UISlider!
@@ -55,6 +49,10 @@ class ViewController: UIViewController {
         isoPickerView.dataSource = self
         isoPickerView.delegate = self
         isoPickerView.tag = 1
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchedGesture(gestureRecgnizer:)))
+        self.view.addGestureRecognizer(pinchGesture)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -365,5 +363,51 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             }
         }
         
+    }
+}
+
+// MARK: Zoom
+extension ViewController {
+    
+    
+    @objc func pinchedGesture(gestureRecgnizer: UIPinchGestureRecognizer) {
+        do {
+            try camera.lockForConfiguration()
+            // ズームの最大値
+            let maxZoomScale: CGFloat = 6.0
+            // ズームの最小値
+            let minZoomScale: CGFloat = 1.0
+            // 現在のカメラのズーム度
+            var currentZoomScale: CGFloat = camera.videoZoomFactor
+            // ピンチの度合い
+            let pinchZoomScale: CGFloat = gestureRecgnizer.scale
+            
+            // ピンチアウトの時、前回のズームに今回のズーム-1を指定
+            // 例: 前回3.0, 今回1.2のとき、currentZoomScale=3.2
+            if pinchZoomScale > 1.0 {
+                currentZoomScale = oldZoomScale+pinchZoomScale-1
+            } else {
+                currentZoomScale = oldZoomScale-(1-pinchZoomScale)*oldZoomScale
+            }
+            
+            // 最小値より小さく、最大値より大きくならないようにする
+            if currentZoomScale < minZoomScale {
+                currentZoomScale = minZoomScale
+            }
+            else if currentZoomScale > maxZoomScale {
+                currentZoomScale = maxZoomScale
+            }
+            
+            // 画面から指が離れたとき、stateがEndedになる。
+            if gestureRecgnizer.state == .ended {
+                oldZoomScale = currentZoomScale
+            }
+            
+            camera.videoZoomFactor = currentZoomScale
+            camera.unlockForConfiguration()
+        } catch {
+            // handle error
+            return
+        }
     }
 }
