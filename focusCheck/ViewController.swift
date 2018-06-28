@@ -268,21 +268,6 @@ class ViewController: UIViewController {
     }
 }
 
-extension AVCaptureDevice {
-    func configureFocusPointOfInterest(focusPointOfInterest: CGPoint, focusMode: FocusMode) {
-        if isFocusPointOfInterestSupported {
-            self.focusPointOfInterest = focusPointOfInterest
-            self.focusMode = focusMode
-        }
-    }
-    func configureExposurePointOfInterest(exposurePointOfInterest: CGPoint, exposureMode: ExposureMode) {
-        if isExposurePointOfInterestSupported {
-            self.exposurePointOfInterest = exposurePointOfInterest
-            self.exposureMode = exposureMode
-        }
-    }
-}
-
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // 新しいキャプチャの追加で呼ばれる
     func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
