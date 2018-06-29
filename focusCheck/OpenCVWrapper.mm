@@ -46,9 +46,22 @@
 //    return MatToUIImage(resultImage);
 }
 
-//+(UIImage *)cannyImage:(UIImage *)image {
-//    return UIImage()
-//}
++(UIImage *)cannyImage:(UIImage *)image {
+    cv::Mat cannyImage, grayImge;
+    cv::Mat matImage = [self matWithImage: image];
+    cv::cvtColor(matImage, grayImge, CV_BGR2GRAY);
+    cv::Canny(grayImge, cannyImage, 120, 220);
+//    printf("\n%d\n", cannyImage.rows);
+//    for (int y = 0; y < cannyImage.rows; y+=3) {
+//        for (int x = 0; x < cannyImage.cols; x+=3) {
+//            printf("%d ", cannyImage.at<unsigned char>(y, x));
+//        }
+//        printf("\n");
+//    }
+    
+//    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    return MatToUIImage(cannyImage);
+}
 
 + (cv::Mat)matWithImage:(UIImage*)image
 {

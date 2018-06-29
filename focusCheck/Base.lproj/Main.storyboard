@@ -29,6 +29,13 @@
                                     <action selector="focusSliderActionWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="jeg-4y-g1T"/>
                                 </connections>
                             </slider>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="suk-jx-PX0">
+                                <rect key="frame" x="125" y="28" width="125" height="29"/>
+                                <segments>
+                                    <segment title="nature"/>
+                                    <segment title="canny"/>
+                                </segments>
+                            </segmentedControl>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqe-zY-aMc">
                                 <rect key="frame" x="0.0" y="585" width="375" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="0.56378424657534243" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -40,9 +47,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="suk-jx-PX0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9R6-O6-dNY"/>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BZv-uo-C1m"/>
                             <constraint firstItem="rl5-0a-ohb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CKd-ub-Ydc"/>
                             <constraint firstItem="5L1-ph-YZu" firstAttribute="top" secondItem="rl5-0a-ohb" secondAttribute="bottom" constant="8" id="Eho-ib-Y8p"/>
+                            <constraint firstItem="suk-jx-PX0" firstAttribute="width" secondItem="X7v-Ky-f0I" secondAttribute="width" multiplier="1:3" id="HpO-Xd-6eo"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="height" secondItem="X7v-Ky-f0I" secondAttribute="height" multiplier="1:9" id="Mnu-bm-HDh"/>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PSa-1e-Gs2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5L1-ph-YZu" secondAttribute="trailing" constant="8" id="PUP-gm-jgS"/>
@@ -52,6 +61,7 @@
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="dIh-pH-oxi"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="top" secondItem="5L1-ph-YZu" secondAttribute="bottom" constant="8" id="g1v-mU-ja6"/>
                             <constraint firstItem="5L1-ph-YZu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="gWn-n6-TU0"/>
+                            <constraint firstItem="suk-jx-PX0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="l2A-Kx-bfP"/>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lJb-9H-ggd"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mbT-XE-5F0"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="vgB-jM-Vzc"/>
@@ -59,6 +69,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cannySegmentedControl" destination="suk-jx-PX0" id="MKB-5q-mPU"/>
                         <outlet property="focusSlider" destination="5L1-ph-YZu" id="1xD-R6-wuM"/>
                         <outlet property="isoPickerView" destination="rl5-0a-ohb" id="Gg6-sT-Pcp"/>
                         <outlet property="pickerView" destination="rqe-zY-aMc" id="2ZH-40-0ve"/>

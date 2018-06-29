@@ -9,6 +9,11 @@
 import UIKit
 import AVFoundation
 
+enum DetectMode: Int {
+    case nature = 0
+    case canny = 1
+}
+
 class ViewController: UIViewController {
 
     var camera: AVCaptureDevice!
@@ -19,6 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var preView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var isoPickerView: UIPickerView!
+    @IBOutlet weak var cannySegmentedControl: UISegmentedControl!
     
     var timeValues: [CMTimeValue] = [0] {
         didSet {
@@ -53,6 +59,7 @@ class ViewController: UIViewController {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchedGesture(gestureRecgnizer:)))
         self.view.addGestureRecognizer(pinchGesture)
 
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -266,13 +273,22 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: AVCaptureVideoDataOutputSampleBufferDelegate
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // 新しいキャプチャの追加で呼ばれる
     func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
-        // キャプチャしたsampleBufferからUIImageを作成
-        let image:UIImage = self.captureImage(sampleBuffer)
         
+        var image: UIImage = UIImage()
+        // キャプチャしたsampleBufferからUIImageを作成
+        // segmentedcontrolにyottekaeru
+        switch DetectMode(rawValue: self.cannySegmentedControl.selectedSegmentIndex)! {
+        case .nature:
+            image = self.captureImage(sampleBuffer)
+        case .canny:
+            image = OpenCVWrapper.cannyImage(self.captureImage(sampleBuffer))
+        }
+
         // 画像を画面に表示
         DispatchQueue.main.async {
             self.preView.image = image
@@ -297,7 +313,6 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         let width:Int = CVPixelBufferGetWidth(imageBuffer)
         let height:Int = CVPixelBufferGetHeight(imageBuffer)
         
-        
         // 色空間
         let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
         
@@ -316,6 +331,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
+// MARK: Picker
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
