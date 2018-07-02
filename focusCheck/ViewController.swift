@@ -20,28 +20,31 @@ class ViewController: UIViewController {
     var session: AVCaptureSession!
     var input: AVCaptureInput!
     var output: AVCaptureVideoDataOutput!
-    
-    @IBOutlet weak var preView: UIImageView!
-    @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var isoPickerView: UIPickerView!
-    @IBOutlet weak var cannySegmentedControl: UISegmentedControl!
-    
     var timeValues: [CMTimeValue] = [0] {
         didSet {
-            self.pickerView.reloadAllComponents()
+            pickerView.reloadAllComponents()
         }
     }
     
     var isoValues: [Float] = [0] {
         didSet {
-            self.pickerView.reloadAllComponents()
+            pickerView.reloadAllComponents()
         }
     }
     
     var beforeTouchPosition: CGPoint = CGPoint(x: 0, y: 0)
     var oldZoomScale: CGFloat = 1.0
     
+    
+    @IBOutlet weak var preView: UIImageView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var isoPickerView: UIPickerView!
+    @IBOutlet weak var cannySegmentedControl: UISegmentedControl!
     @IBOutlet weak var focusSlider: UISlider!
+    
+    
+    @IBOutlet weak var cannyMinValueSlider: UISlider!
+    @IBOutlet weak var cannyMaxValueSlider: UISlider!
     //@IBOutlet weak var exposureSlider: UISlider!
     
     override func viewDidLoad() {
@@ -56,10 +59,8 @@ class ViewController: UIViewController {
         isoPickerView.delegate = self
         isoPickerView.tag = 1
         
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchedGesture(gestureRecgnizer:)))
-        self.view.addGestureRecognizer(pinchGesture)
-
-        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchedGesture(gestureRecgnizer:)))
+        view.addGestureRecognizer(pinchGesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,7 +136,7 @@ class ViewController: UIViewController {
         // セッションからプレビューを表示を
 //        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
 //
-//        previewLayer.frame = self.view.frame
+//        previewLayer.frame = view.frame
 //        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         // レイヤーをViewに設定
@@ -155,7 +156,7 @@ class ViewController: UIViewController {
         print("maxISO = \(maxISO)")
         print("miISO = \(minISO)")
         
-        self.isoValues = (Int(minISO*10)...Int(maxISO*10)).map { num in
+        isoValues = (Int(minISO*10)...Int(maxISO*10)).map { num in
             let returnNum = Float(num) / 10.0
             return returnNum
         }
@@ -169,7 +170,7 @@ class ViewController: UIViewController {
         
         let loopNum = (maxValue - activeFormatMin.value) / 5
         
-        self.timeValues =  (1...loopNum).map { num in
+        timeValues =  (1...loopNum).map { num in
             return CMTimeValue(num * 5)
         }
         
@@ -192,7 +193,7 @@ class ViewController: UIViewController {
         do {
             // https://developer.apple.com/documentation/avfoundation/avcapturedevice/1387810-lockforconfiguration 参考　Note部分
             try camera.lockForConfiguration()
-            self.camera.setFocusModeLocked(lensPosition: sender.value, completionHandler: nil)
+            camera.setFocusModeLocked(lensPosition: sender.value, completionHandler: nil)
             
             session.startRunning()
             camera.unlockForConfiguration()
@@ -223,7 +224,7 @@ class ViewController: UIViewController {
             return
         }
 
-        let location = touch.location(in: self.view)
+        let location = touch.location(in: view)
 
         let normalizePoint = locationNormalize(location)
 
@@ -266,8 +267,8 @@ class ViewController: UIViewController {
     func locationNormalize(_ point: CGPoint) -> CGPoint {
         var normalizePoint = point
         
-        normalizePoint.x = normalizePoint.x / self.view.bounds.width
-        normalizePoint.y = normalizePoint.y / self.view.bounds.height
+        normalizePoint.x = normalizePoint.x / view.bounds.width
+        normalizePoint.y = normalizePoint.y / view.bounds.height
         
         return normalizePoint
     }
@@ -278,15 +279,22 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     // 新しいキャプチャの追加で呼ばれる
     func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
-        
         var image: UIImage = UIImage()
+        
+        
         // キャプチャしたsampleBufferからUIImageを作成
         // segmentedcontrolにyottekaeru
-        switch DetectMode(rawValue: self.cannySegmentedControl.selectedSegmentIndex)! {
+        switch DetectMode(rawValue: cannySegmentedControl.selectedSegmentIndex)! {
         case .nature:
-            image = self.captureImage(sampleBuffer)
+            image = captureImage(sampleBuffer)
         case .canny:
-            image = OpenCVWrapper.cannyImage(self.captureImage(sampleBuffer))
+            
+            var intMinValue = Int32(cannyMinValueSlider.value)
+            var intMaxvalue = Int32(cannyMaxValueSlider.value)
+            let minPointer = withUnsafeMutablePointer(to: &intMinValue) { $0 }
+            let maxPointer = withUnsafeMutablePointer(to: &intMaxvalue) { $0 }
+            
+            image = OpenCVWrapper.cannyImage(captureImage(sampleBuffer), maxValue: maxPointer, minValue: minPointer)
         }
 
         // 画像を画面に表示
@@ -424,6 +432,31 @@ extension ViewController {
         } catch {
             // handle error
             return
+        }
+    }
+}
+
+extension ViewController {
+    @IBAction func segmentChanged(sender: UISegmentedControl) {
+        guard let type = DetectMode(rawValue: sender.selectedSegmentIndex) else {
+            return
+        }
+        
+        switch type {
+        case .nature:
+            pickerView.isHidden = false
+            isoPickerView.isHidden = false
+            focusSlider.isHidden = false
+            
+            cannyMaxValueSlider.isHidden = true
+            cannyMinValueSlider.isHidden = true
+        case .canny:
+            pickerView.isHidden = true
+            isoPickerView.isHidden = true
+            focusSlider.isHidden = true
+            
+            cannyMaxValueSlider.isHidden = false
+            cannyMinValueSlider.isHidden = false
         }
     }
 }

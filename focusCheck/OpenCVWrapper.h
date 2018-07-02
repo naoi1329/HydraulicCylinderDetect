@@ -11,6 +11,6 @@
 
 @interface OpenCVWrapper: NSObject
 +(UIImage *)maskImage:(UIImage *)image topLeftPoint:(CGPoint *)topLeftPoint bottomRightPoint:(CGPoint *)bottomLeftPoint;
-+(UIImage *)cannyImage:(UIImage *)image;
++(UIImage *)cannyImage:(UIImage *)image maxValue:(int *)maxValue minValue:(int *) minValue;
 //+ (cv::Mat)matWithImage:(UIImage*)image
 @end

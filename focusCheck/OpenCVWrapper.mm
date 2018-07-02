@@ -37,29 +37,14 @@
     
     cv::fillConvexPoly(maskImage, points, 4, cv::Scalar(255), CV_AA);
     return MatToUIImage(maskImage);
-//    // 入力する画像の配列
-//    cv::Mat srcArray[] = { matImage, maskImage };
-//    // チャンネルの変換方法の指定
-//    int from_to[] = { 0,0, 1,1, 2,2, 3,3 };
-//    cv::mixChannels(srcArray, 2, &resultImage, 1, from_to, 4);
-//    
-//    return MatToUIImage(resultImage);
 }
 
-+(UIImage *)cannyImage:(UIImage *)image {
++(UIImage *)cannyImage:(UIImage *)image maxValue:(int *)maxValue minValue:(int *) minValue {
     cv::Mat cannyImage, grayImge;
     cv::Mat matImage = [self matWithImage: image];
     cv::cvtColor(matImage, grayImge, CV_BGR2GRAY);
-    cv::Canny(grayImge, cannyImage, 120, 220);
-//    printf("\n%d\n", cannyImage.rows);
-//    for (int y = 0; y < cannyImage.rows; y+=3) {
-//        for (int x = 0; x < cannyImage.cols; x+=3) {
-//            printf("%d ", cannyImage.at<unsigned char>(y, x));
-//        }
-//        printf("\n");
-//    }
+    cv::Canny(grayImge, cannyImage, *minValue, *maxValue);
     
-//    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     return MatToUIImage(cannyImage);
 }
 
@@ -78,5 +63,6 @@
     UIImageToMat(correctImage, mat);
     return mat;
 }
+
 
 @end
