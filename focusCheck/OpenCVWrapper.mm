@@ -39,6 +39,16 @@
     return MatToUIImage(maskImage);
 }
 
++(UIImage *)sobelImage:(UIImage *)image {
+    cv::Mat sobelImage, binaryImage;
+    cv::Mat matImage = [self matWithImage: image];
+    cv::cvtColor(matImage, matImage, CV_BGR2GRAY);
+    cv::threshold(matImage, binaryImage, 124, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+    
+    //cv::Sobel(binaryImage, sobelImage, <#int ddepth#>, <#int dx#>, <#int dy#>);
+    return MatToUIImage(sobelImage);
+}
+
 +(UIImage *)cannyImage:(UIImage *)image maxValue:(int *)maxValue minValue:(int *) minValue {
     cv::Mat cannyImage, grayImge;
     cv::Mat matImage = [self matWithImage: image];

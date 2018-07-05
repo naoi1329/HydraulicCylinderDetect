@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,11 +34,30 @@
                                 <segments>
                                     <segment title="nature"/>
                                     <segment title="canny"/>
+                                    <segment title="sobel"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="iTA-25-yGF"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyU-XY-lGx">
+                                <rect key="frame" x="16" y="405" width="343" height="44"/>
+                                <color key="backgroundColor" red="0.31717175250000001" green="0.85373806949999997" blue="0.49934240200000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WWg-YE-lDg"/>
+                                </constraints>
+                                <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="image save"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="imageSaveButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f7H-sT-a9h"/>
+                                </connections>
+                            </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqe-zY-aMc">
                                 <rect key="frame" x="0.0" y="585" width="375" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="0.56378424657534243" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,12 +75,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="rl5-0a-ohb" firstAttribute="top" secondItem="RyU-XY-lGx" secondAttribute="bottom" constant="16" id="13g-WT-f3y"/>
                             <constraint firstItem="suk-jx-PX0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9R6-O6-dNY"/>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BZv-uo-C1m"/>
                             <constraint firstItem="nNU-ba-JzJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Bkn-Wk-E0i"/>
                             <constraint firstItem="rl5-0a-ohb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CKd-ub-Ydc"/>
                             <constraint firstItem="5L1-ph-YZu" firstAttribute="top" secondItem="rl5-0a-ohb" secondAttribute="bottom" constant="8" id="Eho-ib-Y8p"/>
                             <constraint firstItem="suk-jx-PX0" firstAttribute="width" secondItem="X7v-Ky-f0I" secondAttribute="width" multiplier="1:3" id="HpO-Xd-6eo"/>
+                            <constraint firstItem="RyU-XY-lGx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="JII-hU-wTq"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="height" secondItem="X7v-Ky-f0I" secondAttribute="height" multiplier="1:9" id="Mnu-bm-HDh"/>
                             <constraint firstItem="R3b-tF-PQP" firstAttribute="top" secondItem="nNU-ba-JzJ" secondAttribute="bottom" constant="8" id="ORM-vr-Xiw"/>
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PSa-1e-Gs2"/>
@@ -79,6 +100,7 @@
                             <constraint firstItem="X7v-Ky-f0I" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lJb-9H-ggd"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mbT-XE-5F0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nNU-ba-JzJ" secondAttribute="trailing" constant="8" id="pI4-R4-vbs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RyU-XY-lGx" secondAttribute="trailing" constant="16" id="usn-G4-rj4"/>
                             <constraint firstItem="rqe-zY-aMc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="vgB-jM-Vzc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

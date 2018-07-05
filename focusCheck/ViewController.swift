@@ -12,6 +12,7 @@ import AVFoundation
 enum DetectMode: Int {
     case nature = 0
     case canny = 1
+    case sobel = 2
 }
 
 class ViewController: UIViewController {
@@ -34,14 +35,13 @@ class ViewController: UIViewController {
     
     var beforeTouchPosition: CGPoint = CGPoint(x: 0, y: 0)
     var oldZoomScale: CGFloat = 1.0
-    
+    var tmpSaveImage: UIImage = UIImage()
     
     @IBOutlet weak var preView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var isoPickerView: UIPickerView!
     @IBOutlet weak var cannySegmentedControl: UISegmentedControl!
     @IBOutlet weak var focusSlider: UISlider!
-    
     
     @IBOutlet weak var cannyMinValueSlider: UISlider!
     @IBOutlet weak var cannyMaxValueSlider: UISlider!
@@ -58,6 +58,8 @@ class ViewController: UIViewController {
         isoPickerView.dataSource = self
         isoPickerView.delegate = self
         isoPickerView.tag = 1
+        
+        preView.image = #imageLiteral(resourceName: "IMG_5603.JPG")
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchedGesture(gestureRecgnizer:)))
         view.addGestureRecognizer(pinchGesture)
@@ -202,7 +204,10 @@ class ViewController: UIViewController {
         }
     }
     
-    
+    @IBAction func imageSaveButtonAction(_ sender: UIButton) {
+        UIImageWriteToSavedPhotosAlbum(tmpSaveImage, self, nil, nil)
+        
+    }
     
 //    @IBAction func exposureSliderSliderAction(sender: UISlider) {
 //        do {
@@ -295,11 +300,14 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             let maxPointer = withUnsafeMutablePointer(to: &intMaxvalue) { $0 }
             
             image = OpenCVWrapper.cannyImage(captureImage(sampleBuffer), maxValue: maxPointer, minValue: minPointer)
+        case .sobel:
+            image = OpenCVWrapper.sobelImage(captureImage(sampleBuffer))
         }
 
         // 画像を画面に表示
         DispatchQueue.main.async {
             self.preView.image = image
+            self.tmpSaveImage = image
         }
     }
     
@@ -393,7 +401,6 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 // MARK: Zoom
 extension ViewController {
     
-    
     @objc func pinchedGesture(gestureRecgnizer: UIPinchGestureRecognizer) {
         do {
             try camera.lockForConfiguration()
@@ -457,6 +464,8 @@ extension ViewController {
             
             cannyMaxValueSlider.isHidden = false
             cannyMinValueSlider.isHidden = false
+        case .sobel:
+            break
         }
     }
 }
