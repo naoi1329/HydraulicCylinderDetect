@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0500CD6A20EDD6C9001E4242 /* IMG_5603.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0500CD6920EDD6C9001E4242 /* IMG_5603.JPG */; };
 		05384A6020D9FA220031606C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05384A5F20D9FA220031606C /* AppDelegate.swift */; };
 		05384A6220D9FA220031606C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05384A6120D9FA220031606C /* ViewController.swift */; };
 		05384A6520D9FA220031606C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05384A6320D9FA220031606C /* Main.storyboard */; };
@@ -39,7 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0500CD6920EDD6C9001E4242 /* IMG_5603.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_5603.JPG; path = ../../../Downloads/IMG_5603.JPG; sourceTree = "<group>"; };
 		05384A5C20D9FA220031606C /* focusCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = focusCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05384A5F20D9FA220031606C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05384A6120D9FA220031606C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			children = (
 				05DDB17720E4EAA100D7EE65 /* OpenCVWrapper.h */,
 				05DDB17820E4EAA100D7EE65 /* OpenCVWrapper.mm */,
-				0500CD6920EDD6C9001E4242 /* IMG_5603.JPG */,
 				05DDB17620E4EAA100D7EE65 /* PrefixHeader.pch */,
 				05384A5F20D9FA220031606C /* AppDelegate.swift */,
 				05384A6120D9FA220031606C /* ViewController.swift */,
@@ -292,7 +289,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				05384A6A20D9FA260031606C /* LaunchScreen.storyboard in Resources */,
-				0500CD6A20EDD6C9001E4242 /* IMG_5603.JPG in Resources */,
 				05384A6720D9FA260031606C /* Assets.xcassets in Resources */,
 				05384A6520D9FA220031606C /* Main.storyboard in Resources */,
 			);

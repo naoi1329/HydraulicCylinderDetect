@@ -59,8 +59,6 @@ class ViewController: UIViewController {
         isoPickerView.delegate = self
         isoPickerView.tag = 1
         
-        preView.image = #imageLiteral(resourceName: "IMG_5603.JPG")
-        
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchedGesture(gestureRecgnizer:)))
         view.addGestureRecognizer(pinchGesture)
     }
