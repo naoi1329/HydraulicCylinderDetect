@@ -61,6 +61,9 @@ class ViewController: UIViewController {
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchedGesture(gestureRecgnizer:)))
         view.addGestureRecognizer(pinchGesture)
+        
+        cannyMaxValueSlider.value = 220
+        cannyMinValueSlider.value = 200
     }
 
     override func didReceiveMemoryWarning() {
@@ -133,6 +136,8 @@ class ViewController: UIViewController {
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         
         output.alwaysDiscardsLateVideoFrames = true
+        
+        
         // セッションからプレビューを表示を
 //        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
 //
@@ -284,7 +289,6 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         var image: UIImage = UIImage()
         
-        
         // キャプチャしたsampleBufferからUIImageを作成
         // segmentedcontrolにyottekaeru
         switch DetectMode(rawValue: cannySegmentedControl.selectedSegmentIndex)! {
@@ -305,7 +309,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         // 画像を画面に表示
         DispatchQueue.main.async {
             self.preView.image = image
-            self.tmpSaveImage = image
+            self.tmpSaveImage = self.captureImage(sampleBuffer)
         }
     }
     
