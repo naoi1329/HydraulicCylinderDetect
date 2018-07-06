@@ -64,6 +64,14 @@ class ViewController: UIViewController {
         
         cannyMaxValueSlider.value = 220
         cannyMinValueSlider.value = 200
+        
+        var intMinValue = Int32(cannyMinValueSlider.value)
+        var intMaxvalue = Int32(cannyMaxValueSlider.value)
+        let minPointer = withUnsafeMutablePointer(to: &intMinValue) { $0 }
+        let maxPointer = withUnsafeMutablePointer(to: &intMaxvalue) { $0 }
+//
+        preView.image = OpenCVWrapper.cannyImage(#imageLiteral(resourceName: "IMG_5679"), maxValue: maxPointer, minValue: minPointer)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,7 +144,6 @@ class ViewController: UIViewController {
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         
         output.alwaysDiscardsLateVideoFrames = true
-        
         
         // セッションからプレビューを表示を
 //        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -307,10 +314,10 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
 
         // 画像を画面に表示
-        DispatchQueue.main.async {
-            self.preView.image = image
-            self.tmpSaveImage = self.captureImage(sampleBuffer)
-        }
+//        DispatchQueue.main.async {
+//            self.preView.image = image
+//            self.tmpSaveImage = self.captureImage(sampleBuffer)
+//        }
     }
     
     // sampleBufferからUIImageを作成
