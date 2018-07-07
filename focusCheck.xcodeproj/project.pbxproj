@@ -14,6 +14,8 @@
 		05384A6A20D9FA260031606C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05384A6820D9FA260031606C /* LaunchScreen.storyboard */; };
 		05384A7520D9FA260031606C /* focusCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05384A7420D9FA260031606C /* focusCheckTests.swift */; };
 		05384A8020D9FA260031606C /* focusCheckUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05384A7F20D9FA260031606C /* focusCheckUITests.swift */; };
+		0585C0FA20EF7C0800E9A2C5 /* input.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0585C0F920EF7C0800E9A2C5 /* input.JPG */; };
+		0585C0FC20EF848800E9A2C5 /* output.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 0585C0FB20EF848800E9A2C5 /* output.JPG */; };
 		05DDB17920E4EAA100D7EE65 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05DDB17820E4EAA100D7EE65 /* OpenCVWrapper.mm */; };
 		2EE45A0F96AC38F8D48F1141 /* Pods_focusCheckTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791318A4EA3F6DE9992188B4 /* Pods_focusCheckTests.framework */; };
 		503B0A631561F8CC5D975FE4 /* Pods_focusCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F55F79935F27878BC6A05 /* Pods_focusCheckUITests.framework */; };
@@ -51,6 +53,8 @@
 		05384A7B20D9FA260031606C /* focusCheckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusCheckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05384A7F20D9FA260031606C /* focusCheckUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusCheckUITests.swift; sourceTree = "<group>"; };
 		05384A8120D9FA260031606C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0585C0F920EF7C0800E9A2C5 /* input.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = input.JPG; path = "../../../Dropbox/東海支部/rod input output/input.JPG"; sourceTree = "<group>"; };
+		0585C0FB20EF848800E9A2C5 /* output.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = output.JPG; path = ../../output.JPG; sourceTree = "<group>"; };
 		05DDB17020E4EA1A00D7EE65 /* focusCheck-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "focusCheck-Bridging-Header.h"; sourceTree = "<group>"; };
 		05DDB17620E4EAA100D7EE65 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		05DDB17720E4EAA100D7EE65 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 			children = (
 				05DDB17720E4EAA100D7EE65 /* OpenCVWrapper.h */,
 				05DDB17820E4EAA100D7EE65 /* OpenCVWrapper.mm */,
+				0585C0FB20EF848800E9A2C5 /* output.JPG */,
+				0585C0F920EF7C0800E9A2C5 /* input.JPG */,
 				05DDB17620E4EAA100D7EE65 /* PrefixHeader.pch */,
 				05384A5F20D9FA220031606C /* AppDelegate.swift */,
 				05384A6120D9FA220031606C /* ViewController.swift */,
@@ -288,8 +294,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0585C0FA20EF7C0800E9A2C5 /* input.JPG in Resources */,
 				05384A6A20D9FA260031606C /* LaunchScreen.storyboard in Resources */,
 				05384A6720D9FA260031606C /* Assets.xcassets in Resources */,
+				0585C0FC20EF848800E9A2C5 /* output.JPG in Resources */,
 				05384A6520D9FA220031606C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

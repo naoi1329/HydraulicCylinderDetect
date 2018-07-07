@@ -13,5 +13,6 @@
 +(UIImage *)maskImage:(UIImage *)image topLeftPoint:(CGPoint *)topLeftPoint bottomRightPoint:(CGPoint *)bottomLeftPoint;
 +(UIImage *)cannyImage:(UIImage *)image maxValue:(int *)maxValue minValue:(int *) minValue;
 +(UIImage *)sobelImage:(UIImage *)image;
++(UIImage *)thresholdUIImage:(UIImage *)image;
 //+ (cv::Mat)matWithImage:(UIImage*)image
 @end

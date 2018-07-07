@@ -64,14 +64,17 @@ class ViewController: UIViewController {
         
         cannyMaxValueSlider.value = 220
         cannyMinValueSlider.value = 200
+//      #imageLiteral(resourceName: "IMG_5691")
         
         var intMinValue = Int32(cannyMinValueSlider.value)
         var intMaxvalue = Int32(cannyMaxValueSlider.value)
         let minPointer = withUnsafeMutablePointer(to: &intMinValue) { $0 }
         let maxPointer = withUnsafeMutablePointer(to: &intMaxvalue) { $0 }
-//
-        preView.image = OpenCVWrapper.cannyImage(#imageLiteral(resourceName: "IMG_5679"), maxValue: maxPointer, minValue: minPointer)
         
+//        preView.image = OpenCVWrapper.thresholdUIImage(UIImage(named: "output.JPG"));
+        preView.image = OpenCVWrapper.cannyImage(UIImage(named: "input.JPG"), maxValue: maxPointer, minValue: minPointer)
+        
+        UIImageWriteToSavedPhotosAlbum(preView.image!, self, nil, nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -144,6 +147,7 @@ class ViewController: UIViewController {
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         
         output.alwaysDiscardsLateVideoFrames = true
+        
         
         // セッションからプレビューを表示を
 //        let previewLayer = AVCaptureVideoPreviewLayer(session: session)

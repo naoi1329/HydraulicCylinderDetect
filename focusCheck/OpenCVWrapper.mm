@@ -76,6 +76,12 @@
     printf("\n\n");
 }
 
++(UIImage *)thresholdUIImage:(UIImage *)image {
+    cv::Mat matImage = [self matWithImage: image];
+    
+    return MatToUIImage([self threshold: matImage.clone()]);
+}
+
 +(UIImage *)cannyImage:(UIImage *)image maxValue:(int *)maxValue minValue:(int *) minValue {
     cv::Mat cannyImage, grayImge;
     cv::Mat matImage = [self matWithImage: image];
@@ -147,7 +153,37 @@
     printf("y:%d x:%d\n", cannyRoiImageBGRA.rows, cannyRoiImageBGRA.cols);
     
     cv::rectangle(cannyImage, cv::Point(roi.x, roi.y), cv::Point(roi.x+roi.width, roi.y+roi.height), cv::Scalar(255), 3);
-    cannyRoiImageBGRA.copyTo(cannyRoiImage);
+    
+    //cannyRoiImageBGRAの白色の線を赤色に
+    printf("\n%d\n", cannyRoiImageBGRA.cv::Mat::type());
+    
+//    for (int y = roi.y; y < roi.y + roi.height; y++) {
+//        for (int x = roi.x; x < roi.x + roi.width; x++) {
+//            cv::Vec4b s = cannyImage.at<cv::Vec4b>(y, x);
+//
+//            if (s[0] == 255) {
+//                cannyImage.at<cv::Vec4b>(y, x) = {255, 0, 255, 0};
+//            }
+//        }
+//    }
+    cv::Mat redImage = cv::Mat::zeros(cannyRoiImageBGRA.rows, cannyRoiImageBGRA.cols, CV_8UC4);
+    
+    for (int y = 0; y < roi.height; y++) {
+        for (int x = 0; x < roi.width; x++) {
+            unsigned char s = cannyRoiImageGRAY.at<unsigned char>(y, x);
+            
+            if (s == 255) {
+                redImage.at<cv::Vec4b>(y, x) = {255, 0, 0, 255};
+            } else {
+                redImage.at<cv::Vec4b>(y, x) = {0, 0, 0, 255};
+            }
+        }
+    }
+    
+    dilate(redImage, redImage, cv::noArray(), cv::Point(-1, -1), 3);
+//    return MatToUIImage(redImage);
+    redImage.copyTo(cannyRoiImage);
+    
     return MatToUIImage(cannyImage);
 }
 
