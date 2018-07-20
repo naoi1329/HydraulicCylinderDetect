@@ -72,9 +72,9 @@ class ViewController: UIViewController {
         let maxPointer = withUnsafeMutablePointer(to: &intMaxvalue) { $0 }
         
 //        preView.image = OpenCVWrapper.thresholdUIImage(UIImage(named: "output.JPG"));
-//        preView.image = OpenCVWrapper.cannyImage(UIImage(named: "input.JPG"), maxValue: maxPointer, minValue: minPointer)
+        preView.image = OpenCVWrapper.cannyImage(UIImage(named: "input.JPG"), maxValue: maxPointer, minValue: minPointer)
 //
-//        UIImageWriteToSavedPhotosAlbum(preView.image!, self, nil, nil)
+        UIImageWriteToSavedPhotosAlbum(preView.image!, self, nil, nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -319,8 +319,8 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
         // 画像を画面に表示
         DispatchQueue.main.async {
-            self.preView.image = image
-            self.tmpSaveImage = self.captureImage(sampleBuffer)
+//            self.preView.image = image
+//            self.tmpSaveImage = self.captureImage(sampleBuffer)
         }
     }
     
