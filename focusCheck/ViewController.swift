@@ -72,9 +72,9 @@ class ViewController: UIViewController {
         let maxPointer = withUnsafeMutablePointer(to: &intMaxvalue) { $0 }
         
 //        preView.image = OpenCVWrapper.thresholdUIImage(UIImage(named: "output.JPG"));
-        preView.image = OpenCVWrapper.cannyImage(UIImage(named: "input.JPG"), maxValue: maxPointer, minValue: minPointer)
+//        preView.image = OpenCVWrapper.cannyImage(UIImage(named: "input.JPG"), maxValue: maxPointer, minValue: minPointer)
 //
-        UIImageWriteToSavedPhotosAlbum(preView.image!, self, nil, nil)
+//        UIImageWriteToSavedPhotosAlbum(preView.image!, self, nil, nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -120,7 +120,6 @@ class ViewController: UIViewController {
         // カメラからの入力データ
         do {
             input = try AVCaptureDeviceInput(device: camera)
-            
         } catch let error as NSError {
             print(error)
         }
@@ -147,7 +146,6 @@ class ViewController: UIViewController {
         output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         
         output.alwaysDiscardsLateVideoFrames = true
-        
         
         // セッションからプレビューを表示を
 //        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -220,7 +218,6 @@ class ViewController: UIViewController {
     
     @IBAction func imageSaveButtonAction(_ sender: UIButton) {
         UIImageWriteToSavedPhotosAlbum(tmpSaveImage, self, nil, nil)
-        
     }
     
 //    @IBAction func exposureSliderSliderAction(sender: UISlider) {
@@ -306,7 +303,6 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         case .nature:
             image = captureImage(sampleBuffer)
         case .canny:
-            
             var intMinValue = Int32(cannyMinValueSlider.value)
             var intMaxvalue = Int32(cannyMaxValueSlider.value)
             let minPointer = withUnsafeMutablePointer(to: &intMinValue) { $0 }
@@ -319,8 +315,8 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
         // 画像を画面に表示
         DispatchQueue.main.async {
-//            self.preView.image = image
-//            self.tmpSaveImage = self.captureImage(sampleBuffer)
+            self.preView.image = image
+            self.tmpSaveImage = self.captureImage(sampleBuffer)
         }
     }
     

@@ -18,7 +18,7 @@
 +(UIImage *)maskImage:(UIImage *)image topLeftPoint:(CGPoint *)topLeftPoint bottomRightPoint:(CGPoint *)bottomRightPoint {
     cv::Mat maskImage, resultImage;
     cv::Mat matImage = [self matWithImage: image];
-    printf("rows = %d", matImage.rows);
+    //printf("rows = %d", matImage.rows);
     maskImage = cv::Mat(matImage.size(), CV_8U, cv::Scalar(0));
     
     // 左上と右下の2点から4点作成（左下と右上）
@@ -29,11 +29,11 @@
                             cv::Point(bottomRightPoint->x, topLeftPoint->y)
                           };
     
-    for (int i = 0; i < 4; i++) {
-        printf("%d: x = %d, y = %d\n", i, points[i].x, points[i].y);
-    }
-    
-    printf("x = %d, y = %d\n", maskImage.cols, maskImage.rows);
+//    for (int i = 0; i < 4; i++) {
+//        //printf("%d: x = %d, y = %d\n", i, points[i].x, points[i].y);
+//    }
+//
+    //printf("x = %d, y = %d\n", maskImage.cols, maskImage.rows);
     
     cv::fillConvexPoly(maskImage, points, 4, cv::Scalar(255), CV_AA);
     return MatToUIImage(maskImage);
@@ -87,15 +87,22 @@
     cv::Mat matImage = [self matWithImage: image];
     cv::cvtColor(matImage, grayImge, CV_BGRA2GRAY);
     grayImge = [self threshold: grayImge.clone()];
+    
+    //closing
+//    dilate(grayImge, grayImge, cv::noArray(), cv::Point(-1, -1), 3);
+//    erode(grayImge, grayImge, cv::noArray(), cv::Point(-1, -1), 3);
+//    printf("aaaa\n");
+//    return MatToUIImage(grayImge);
+    
 //    [self histgram:grayImge];
-    std::vector< std::vector<cv::Point> > contours;
+    std::vector<std::vector<cv::Point>> contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours(grayImge, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_TC89_L1);
-    
+
     if (contours.size() == 0) {
         return image;
     }
-    
+
     std::vector<cv::Point> maxAreaContour;
     double maxArea = cv::contourArea(contours[0], false);
     for (int i = 1; i < contours.size(); i++) {
@@ -104,11 +111,17 @@
             maxAreaContour = contours[i];
         }
     }
+
+//    for (int i = 0; contours.size(); i++) {
+//        cv::polylines(matImage, contours[i], true, cv::Scalar(255, 0, 0), 2);
+//    }
+//    return MatToUIImage(matImage);
+    
     
 //    cv::polylines(matImage, maxAreaContour, true, cv::Scalar(255, 0, 0), 2);
     cv::Point minP = {1900000, 10000}; //x, y
     cv::Point maxP = {0, 0}; //x, y
-    
+
     //TODO: ROIがx,y, width, height だったので　minP maxP 必要ない　一つのcv::Pointでok
     for (int i = 1 ; i < maxAreaContour.size(); i++) {
         if (minP.x > maxAreaContour[i].x) {
@@ -117,7 +130,7 @@
         if (minP.y > maxAreaContour[i].y) {
             minP.y = maxAreaContour[i].y;
         }
-        
+
         if (maxP.x < maxAreaContour[i].x) {
             maxP.x = maxAreaContour[i].x;
         }
@@ -126,15 +139,15 @@
         }
     }
     //yの値を　光の強い帯部分の下部を見るように設定
-    //はみ出さないことを調べる
+    //roiが画像からはみ出さないことを調べる
     if (maxP.x-20 + 200 >= matImage.cols) {
         return image;
     }
     //roi設定
-    printf("%d %d %d %d\n", minP.x, minP.y, maxP.x, maxP.y);
+    //printf("%d %d %d %d\n", minP.x, minP.y, maxP.x, maxP.y);
     cv::Rect roi(maxP.x-20, 0, 200, matImage.rows-1); // x,y width, height
-    printf("%d %d\n", roi.x + roi.width, roi.height);
-    printf("%d %d\n", grayImge.cols, grayImge.rows);
+//    printf("%d %d\n", roi.x + roi.width, roi.height);
+//    printf("%d %d\n", grayImge.cols, grayImge.rows);
 //    return MatToUIImage(grayImge);
     cannyImage = matImage.clone();
     cv::Mat4b roiImage = matImage(roi);
@@ -145,18 +158,18 @@
     cv::Mat4b cannyRoiImageBGRA;
     cv::cvtColor(roiImage, roiGray, CV_BGRA2GRAY);
     cv::Canny(roiGray, cannyRoiImageGRAY, *minValue, *maxValue);
-    printf("y:%d x:%d\n", roiImage.rows, roiImage.cols);
-    printf("y:%d x:%d\n", cannyRoiImageGRAY.rows, cannyRoiImageGRAY.cols);
+//    printf("y:%d x:%d\n", roiImage.rows, roiImage.cols);
+//    printf("y:%d x:%d\n", cannyRoiImageGRAY.rows, cannyRoiImageGRAY.cols);
 //    printf("%d", cannyRoiImage.channels());
     cv::cvtColor(cannyRoiImageGRAY, cannyRoiImageBGRA, CV_GRAY2BGRA);
 //    printf("%d", cannyImage.channels());
-    printf("y:%d x:%d\n", cannyRoiImageBGRA.rows, cannyRoiImageBGRA.cols);
-    
+//    printf("y:%d x:%d\n", cannyRoiImageBGRA.rows, cannyRoiImageBGRA.cols);
+
     cv::rectangle(cannyImage, cv::Point(roi.x, roi.y), cv::Point(roi.x+roi.width, roi.y+roi.height), cv::Scalar(255), 3);
-    
+
     //cannyRoiImageBGRAの白色の線を赤色に
-    printf("\n%d\n", cannyRoiImageBGRA.cv::Mat::type());
-    
+//    printf("\n%d\n", cannyRoiImageBGRA.cv::Mat::type());
+
 //    for (int y = roi.y; y < roi.y + roi.height; y++) {
 //        for (int x = roi.x; x < roi.x + roi.width; x++) {
 //            cv::Vec4b s = cannyImage.at<cv::Vec4b>(y, x);
@@ -166,24 +179,25 @@
 //            }
 //        }
 //    }
-    cv::Mat redImage = cv::Mat::zeros(cannyRoiImageBGRA.rows, cannyRoiImageBGRA.cols, CV_8UC4);
-    
-    for (int y = 0; y < roi.height; y++) {
-        for (int x = 0; x < roi.width; x++) {
-            unsigned char s = cannyRoiImageGRAY.at<unsigned char>(y, x);
-            
-            if (s == 255) {
-                redImage.at<cv::Vec4b>(y, x) = {255, 0, 0, 255};
-            } else {
-                redImage.at<cv::Vec4b>(y, x) = {0, 0, 0, 255};
-            }
-        }
-    }
-    
-    dilate(redImage, redImage, cv::noArray(), cv::Point(-1, -1), 3);
+
+//    cv::Mat redImage = cv::Mat::zeros(cannyRoiImageBGRA.rows, cannyRoiImageBGRA.cols, CV_8UC4);
+//
+//    for (int y = 0; y < roi.height; y++) {
+//        for (int x = 0; x < roi.width; x++) {
+//            unsigned char s = cannyRoiImageGRAY.at<unsigned char>(y, x);
+//
+//            if (s == 255) {
+//                redImage.at<cv::Vec4b>(y, x) = {255, 0, 0, 255};
+//            } else {
+//                redImage.at<cv::Vec4b>(y, x) = {0, 0, 0, 255};
+//            }
+//        }
+//    }
+
+//    dilate(redImage, redImage, cv::noArray(), cv::Point(-1, -1), 3);
 //    return MatToUIImage(redImage);
-    redImage.copyTo(cannyRoiImage);
-    
+//    redImage.copyTo(cannyRoiImage);
+
     return MatToUIImage(cannyImage);
 }
 

@@ -650,6 +650,7 @@
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/focusCheck/PrefixHeader.pch";
 				INFOPLIST_FILE = focusCheck/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -673,6 +674,7 @@
 				DEVELOPMENT_TEAM = 5YJYY9X256;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/focusCheck/PrefixHeader.pch";
 				INFOPLIST_FILE = focusCheck/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
